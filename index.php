@@ -8,15 +8,17 @@
 <div class="container">
 
     <div class="row">
-
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
+        <!-- Titlebar Column -->
+        <div class="col-md-12">
             <h1 class="my-4">
                 <?php echo get_bloginfo( 'name' ); ?>
             </h1>
-            <h3 class="my-4"><small><?php echo get_bloginfo( 'description' ); ?></small></h2>
+            <h3 class="my-4"><small><?php echo get_bloginfo( 'description' ); ?></small></h3>
+        </div>
 
-                <?php
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <?php
             if (have_posts() ): while (have_posts() ): the_post();
                 get_template_part( 'content', get_post_format() );
             endwhile; endif;

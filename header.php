@@ -6,12 +6,6 @@
     <meta name="author" content="">
 
     <title><?php echo get_bloginfo( 'name' ); ?></title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo get_bloginfo('template_directory'); ?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="<?php echo get_bloginfo('template_directory'); ?>/css/blog-home.css" rel="stylesheet">
     
     <?php wp_head();?>
 
