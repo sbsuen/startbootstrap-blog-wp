@@ -4,8 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title><?php echo get_bloginfo( 'name' ); ?></title>
     
     <?php wp_head();?>
 
@@ -14,6 +12,7 @@
   <body>
 
     <!-- Navigation -->
+    <!-- TODO: Add in dynamic navbar for pages taking li and a classes into account -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="<?php echo get_bloginfo( 'wpurl' );?>"><?php echo get_bloginfo( 'name' ); ?></a>
