@@ -1,0 +1,12 @@
+- [ ] Fix collapsible navbar
+- [ ] Add Social Media/Contact Widgets (i.e. Facebook, Instagram, Twitter)
+- [ ] Add in Comment functionality
+- [ ] php for Page/Post images
+- [ ] Highlight current page on Navbar
+- [ ] Custom Pages
+	- [ ] About Me
+	- [ ] Portfolio
+	- [ ] Contact
+- [ ] Sidebar Widgets
+	- [ ] Author profile picture
+	- [ ] What I'm Up to

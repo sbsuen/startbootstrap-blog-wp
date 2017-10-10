@@ -12,12 +12,15 @@ function get_stylesheets(){
 }
 add_action( 'wp_enqueue_scripts', 'get_stylesheets' );
 
+//Custom function used to dynamically populate the navbar
 function get_navbar(){
-    //TODO
-    //foreach page in pages
-    //<li class="nav-item active">
-    //    <a class="nav-link" href="#">Home
-    //        <span class="sr-only">(current)</span>
-    //    </a>
-    //</li>
+    $pages = wp_list_pluck(get_pages(), 'post_title');
+    
+    foreach ($pages as $page){
+        echo '<li class="nav-item">';
+        echo '<a class="nav-link" href="';
+        echo get_bloginfo('wpurl');
+        echo "/",$page,'">',$page;
+        echo '</a></li>';
+    }
 }
