@@ -25,8 +25,6 @@ function get_navbar(){
     }
 }
 
-<<<<<<< HEAD
-
 /* Custom Settings Page Setup */
 function custom_settings_add_menu(){
     add_menu_page( 'Custom Settings', 'Custom Settings', 'manage_options', 'custom-settings', 'custom_settings_page', null, 99 );
@@ -82,8 +80,8 @@ function setting_linkedin() { ?>
 // Twitter
 function setting_twitter() { ?>
   <input type="text" name="twitter" id="twitter" value="<?php echo get_option( 'twitter' ); ?>" />
-<?php }<?php }
-=======
+<?php }
+
 function bootstrap_pagination( $echo = true ) {
 	global $wp_query;
 
@@ -119,4 +117,3 @@ function bootstrap_pagination( $echo = true ) {
 		}
 	}
 }
->>>>>>> b30e647d981fba8689f4dd3671467e35cc1372de
