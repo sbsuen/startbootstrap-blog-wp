@@ -1,11 +1,16 @@
 <!-- Blog Post -->
 <div class="card mb-4">
-    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    <!-- Preview Image -->
+    <?php if ( has_post_thumbnail() ) : ?>
+    <img class="card-img-top" src="<?php the_post_thumbnail_url() ?>" alt="Card image cap">
+    <?php endif;?>
     <div class="card-body">
         <h2 class="card-title">
             <?php the_title(); ?>
         </h2>
-        <p><?php the_excerpt(); ?></p>
+        <p>
+            <?php the_excerpt(); ?>
+        </p>
         <a href="<?php the_permalink(); ?>" class="btn btn-primary">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">
@@ -16,14 +21,3 @@
         </a>
     </div>
 </div>
-
-<!-- Pagination 
-          <ul class="pagination justify-content-center mb-4">
-            <li class="page-item">
-              <a class="page-link" href="#">&larr; Older</a>
-            </li>
-            <li class="page-item disabled">
-              <a class="page-link" href="#">Newer &rarr;</a>
-            </li>
-          </ul>
-            -->
