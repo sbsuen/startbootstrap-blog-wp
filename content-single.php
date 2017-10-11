@@ -21,7 +21,9 @@
 <hr>
 
 <!-- Preview Image -->
-<img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+<?php if ( has_post_thumbnail() ) : ?>
+<img class="img-fluid rounded" src="<?php the_post_thumbnail_url() ?>" alt="">
+<?php endif;?>
 
 <hr>
 

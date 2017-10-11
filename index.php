@@ -21,7 +21,11 @@
             <?php
             if (have_posts() ): while (have_posts() ): the_post();
                 get_template_part( 'content', get_post_format() );
-            endwhile; endif;
+            endwhile; ?>
+                <!-- Pagination -->
+                <?php bootstrap_pagination( $echo = true ) ?>
+                <?php
+            endif;
             ?>
         </div>
 
@@ -35,3 +39,14 @@
 <?php get_footer(); ?>
 
 </html>
+
+<!-- Pagination 
+          <ul class="pagination justify-content-center mb-4">
+            <li class="page-item">
+              <a class="page-link" href="#">&larr; Older</a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#">Newer &rarr;</a>
+            </li>
+          </ul>
+            -->
