@@ -1,5 +1,3 @@
-- [ ] Fix collapsible navbar
-- [ ] Add Social Media/Contact Widgets (i.e. Facebook, Instagram, Twitter)
 - [ ] Add in Comment functionality
 - [ ] Highlight current page on Navbar
 - [ ] Pagination

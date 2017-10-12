@@ -5,10 +5,11 @@ add_theme_support('post-thumbnails');
 
 function get_stylesheets(){
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css', array(), '4.0.0');
+    wp_enqueue_style('font-awesome', get_template_directory_uri() . '/vendor/font-awesome/css/font-awesome.min.css');
     wp_enqueue_style('blog', get_template_directory_uri() . '/css/blog-home.css');
     wp_enqueue_script('jquery', get_template_directory_uri() . '/vendor/jquery/jquery.min.js');
     wp_enqueue_script('popper', get_template_directory_uri() . '/vendor/popper/popper.min.js');
-    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.js', array('jquery'), '4.0.0');   
+    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/js/bootstrap.min.js', array('jquery'), '4.0.0', true);   
 }
 add_action( 'wp_enqueue_scripts', 'get_stylesheets' );
 
@@ -53,7 +54,11 @@ function custom_settings_page_setup() {
     add_settings_field( 'linkedin', 'LinkedIn URL', 'setting_linkedin', 'theme-options', 'section' );
     add_settings_field( 'twitter', 'Twitter URL', 'setting_instagram', 'theme-options', 'section' );
 
-  register_setting('section', 'twitter');
+    register_setting('section', 'facebook');
+    register_setting('section', 'github');
+    register_setting('section', 'instagram');
+    register_setting('section', 'linkedin');
+    register_setting('section', 'twitter');
 }
 add_action( 'admin_init', 'custom_settings_page_setup' );
 
@@ -81,6 +86,20 @@ function setting_linkedin() { ?>
 function setting_twitter() { ?>
   <input type="text" name="twitter" id="twitter" value="<?php echo get_option( 'twitter' ); ?>" />
 <?php }
+
+//Add Social Media Icons
+function get_social_media_icons(){
+    $facebook = get_option('facebook');
+    $github = get_option('github');
+    
+    echo "<br>\n";
+    if(!empty($facebook)){
+        echo '<a class="social-icon" href=".$facebook"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>';
+    }
+    if(!empty($github)){
+        echo '<a class="social-icon" href=".$github"><i class="fa fa-github fa-fw fa-2x"></i></a>';
+    }
+}
 
 function bootstrap_pagination( $echo = true ) {
 	global $wp_query;
