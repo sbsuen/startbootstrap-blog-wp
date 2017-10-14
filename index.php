@@ -19,11 +19,14 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
+            //THE LOOP
             if (have_posts() ): while (have_posts() ): the_post();
                 get_template_part( 'content', get_post_format() );
             endwhile; ?>
                 <!-- Pagination -->
-                <?php bootstrap_pagination( $echo = true ) ?>
+                <ul class="pagination justify-content-center mb-4">
+                    <?php get_pagination_links() ?>
+                </ul>
                 <?php
             endif;
             ?>

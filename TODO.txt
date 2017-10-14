@@ -1,6 +1,4 @@
 - [ ] Add in Comment functionality
-- [ ] Pagination
-	- [ ] Create php file for pagination
 - [ ] Custom Pages
 	- [ ] About Me
 	- [ ] Services

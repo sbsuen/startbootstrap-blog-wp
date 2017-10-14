@@ -4,11 +4,10 @@
 /**************************************************************************************************************************************/
 add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
-add_theme_support('menus');
 
-add_action( 'after_setup_theme', 'wpt_setup' );
-function wpt_setup() {  
-    register_nav_menu( 'Primary', __( 'Primary navigation', 'wptuts' ) );
+add_action( 'after_setup_theme', 'custom_nav_setup' );
+function custom_nav_setup() {  
+    register_nav_menu( 'Primary', __( 'Start Bootstrap Blog - Wordpress', 'wptuts' ) );
 }
 
 function get_stylesheets(){
@@ -127,42 +126,24 @@ function get_social_media_icons(){
 }
 
 /**************************************************************************************************************************************/
-/* Paginations                                                                                                                        */
+/* Pagination                                                                                                                         */
 /**************************************************************************************************************************************/
-
-function bootstrap_pagination( $echo = true ) {
-	global $wp_query;
-
-	$big = 999999999; // need an unlikely integer
-
-	$pages = paginate_links( array(
-			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-			'format' => '?paged=%#%',
-			'current' => max( 1, get_query_var('paged') ),
-			'total' => $wp_query->max_num_pages,
-			'type'  => 'array',
-			'prev_next'   => true,
-			'prev_text'    => __('« Prev'),
-			'next_text'    => __('Next »'),
-		)
-	);
-
-	if( is_array( $pages ) ) {
-		$paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
-
-		$pagination = '<ul class="pagination">';
-
-		foreach ( $pages as $page ) {
-			$pagination .= "<li>$page</li>";
-		}
-
-		$pagination .= '</ul>';
-
-		if ( $echo ) {
-			echo $pagination;
-		} else {
-			return $pagination;
-		}
-	}
+function get_pagination_links(){
+    //If older posts exist
+    if (!get_next_posts_link()) :?>
+        <li class="page-item disabled"><a class="page-link" href="#">&larr; Older</a></li>
+    <?php
+    else: ?>
+        <li class="page-item"><a class="page-link" href="<?php echo get_next_posts_page_link(); ?>">&larr; Older</a></li>
+    <?php
+    endif;
+    
+    //If newer posts don't exist
+    if (!get_previous_posts_link()) :?>
+        <li class="page-item disabled"><a class="page-link" href="#">Newer &rarr;</a></li>
+    <?php
+    else:?>
+        <li class="page-item"><a class="page-link" href="<?php echo get_previous_posts_page_link(); ?>">Newer &rarr;</a></li>
+    <?php
+    endif;
 }
-
