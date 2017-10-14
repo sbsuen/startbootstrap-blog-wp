@@ -1,7 +1,15 @@
 <?php
-
+/**************************************************************************************************************************************/
+/* Theme Setup                                                                                                                        */
+/**************************************************************************************************************************************/
 add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
+add_theme_support('menus');
+
+add_action( 'after_setup_theme', 'wpt_setup' );
+function wpt_setup() {  
+    register_nav_menu( 'Primary', __( 'Primary navigation', 'wptuts' ) );
+}
 
 function get_stylesheets(){
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css', array(), '4.0.0');
@@ -13,20 +21,31 @@ function get_stylesheets(){
 }
 add_action( 'wp_enqueue_scripts', 'get_stylesheets' );
 
-//Custom function used to dynamically populate the navbar
-function get_navbar(){
-    $pages = wp_list_pluck(get_pages(), 'post_title');
-    
-    foreach ($pages as $page){
-        echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="';
-        echo get_bloginfo('wpurl');
-        echo "/",$page,'">',$page;
-        echo '</a></li>';
-    }
+/**************************************************************************************************************************************/
+/* Navbar Setup                                                                                                                       */
+/**************************************************************************************************************************************/
+function nav_li_class($classes,$item){
+    $new_classes[] = 'nav-item';
+    if ( in_array( 'current-menu-item', $classes ) ) {
+		$new_classes[] = 'active';
+	}
+    return $new_classes;
 }
+add_filter( 'nav_menu_item_id', '__return_empty_string' );
+add_filter('nav_menu_css_class','nav_li_class',10,2);
 
-/* Custom Settings Page Setup */
+function nav_a_class($atts,$item){
+    $new_atts = array( 'class' => 'nav-link');
+    if (isset($atts['href'])){
+        $new_atts['href'] = $atts['href'];
+    }
+    return $new_atts;
+}
+add_filter( 'nav_menu_link_attributes', 'nav_a_class', 10, 4 );
+
+/**************************************************************************************************************************************/
+/* Custom Settings Page Setup                                                                                                         */
+/**************************************************************************************************************************************/
 function custom_settings_add_menu(){
     add_menu_page( 'Custom Settings', 'Custom Settings', 'manage_options', 'custom-settings', 'custom_settings_page', null, 99 );
 }
@@ -62,6 +81,10 @@ function custom_settings_page_setup() {
 }
 add_action( 'admin_init', 'custom_settings_page_setup' );
 
+/**************************************************************************************************************************************/
+/* Social Media Icon Setup                                                                                                            */
+/**************************************************************************************************************************************/
+
 // Facebook
 function setting_facebook() { ?>
   <input type="text" name="facebook" id="facebook" value="<?php echo get_option( 'facebook' ); ?>" />
@@ -94,12 +117,18 @@ function get_social_media_icons(){
     
     echo "<br>\n";
     if(!empty($facebook)){
-        echo '<a class="social-icon" href=".$facebook"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>';
+        ?><a class="social-icon" href="<?php echo get_option( 'facebook' ) ?>"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>
+        <?php
     }
     if(!empty($github)){
-        echo '<a class="social-icon" href=".$github"><i class="fa fa-github fa-fw fa-2x"></i></a>';
+        ?><a class="social-icon" href="<?php echo get_option( 'github' ) ?>"><i class="fa fa-github fa-fw fa-2x"></i></a>
+        <?php
     }
 }
+
+/**************************************************************************************************************************************/
+/* Paginations                                                                                                                        */
+/**************************************************************************************************************************************/
 
 function bootstrap_pagination( $echo = true ) {
 	global $wp_query;
@@ -136,3 +165,4 @@ function bootstrap_pagination( $echo = true ) {
 		}
 	}
 }
+

@@ -1,5 +1,4 @@
 - [ ] Add in Comment functionality
-- [ ] Highlight current page on Navbar
 - [ ] Pagination
 	- [ ] Create php file for pagination
 - [ ] Custom Pages
